@@ -12,15 +12,29 @@
 
     <script>
         function testWebService() {
-            fetch('/test')
+            fetch('https://nrc-t3.onrender.com/download')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to trigger test.');
                 }
-                return response.text();
+                return response.blob();
             })
             .then(data => {
-                alert("Please check the download folder.");
+                // Create a blob URL for the data
+                const blobUrl = URL.createObjectURL(data);
+                
+                // Create an anchor element
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = 'data.csv'; // Specify the filename for download
+                document.body.appendChild(link);
+                
+                // Simulate a click event on the anchor element
+                link.click();
+                
+                // Clean up
+                document.body.removeChild(link);
+                URL.revokeObjectURL(blobUrl);
             })
             .catch(error => {
                 alert('Error: ' + error.message);
