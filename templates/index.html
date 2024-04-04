@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Service Tester</title>
+</head>
+<body>
+    <h1>Web Service Tester</h1>
+    <p>Click the button below to test the web service:</p>
+    <button onclick="testWebService()">Test Web Service</button>
+
+    <script>
+        function testWebService() {
+            fetch('/test')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to trigger test.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                alert("Please check the download folder.");
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            });
+        }
+    </script>
+</body>
+</html>
