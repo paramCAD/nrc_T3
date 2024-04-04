@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 def test_download_endpoint():
-    url = 'http://localhost:5000/download'  # Update the URL according to your deployment
+    url = 'https://nrc-t3.onrender.com/download'  # Update the URL according to your deployment
     response = requests.get(url)
     if response.status_code == 200:
         download_folder = str(Path.home() / "Downloads")
